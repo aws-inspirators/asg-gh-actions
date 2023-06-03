@@ -71,9 +71,7 @@ resource "aws_s3_bucket" "bucket" {
 data "aws_vpc" "default_vpc" {
   default = true
 }
-data "aws_subnet_ids" "default_subnet" {
-  vpc_id = data.aws_vpc.default_vpc.id
-}
+
 resource "aws_security_group" "instances" {
   name = "instance-security-group"
 }
@@ -85,7 +83,7 @@ resource "aws_security_group_rule" "allow_http_inbound" {
   protocol    = "tcp"
   cidr_blocks = ["0.0.0.0/0"]
 }
-resource "aws_lb_listener" "http" {
+/* resource "aws_lb_listener" "http" {
   load_balancer_arn = aws_lb.load_balancer.arn
   port = 80
   protocol = "HTTP"
@@ -123,8 +121,8 @@ resource "aws_lb_target_group_attachment" "instance_2" {
   target_group_arn = aws_lb_target_group.instances.arn
   target_id        = aws_instance.instance_2.id
   port             = 8080
-}
-resource "aws_lb_listener_rule" "instances" {
+} */
+/* resource "aws_lb_listener_rule" "instances" {
   listener_arn = aws_lb_listener.http.arn
   priority     = 100
   condition {
@@ -136,7 +134,8 @@ resource "aws_lb_listener_rule" "instances" {
     type             = "forward"
     target_group_arn = aws_lb_target_group.instances.arn
   }
-}
+} */
+
 resource "aws_security_group" "alb" {
   name = "alb-security-group"
 }
@@ -156,12 +155,12 @@ resource "aws_security_group_rule" "allow_alb_all_outbound" {
   protocol    = "-1"
   cidr_blocks = ["0.0.0.0/0"]
 }
-resource "aws_lb" "load_balancer" {
+/* resource "aws_lb" "load_balancer" {
   name               = "web-app-lb"
   load_balancer_type = "application"
-  subnets            = data.aws_subnet_ids.default_subnet.ids
   security_groups    = [aws_security_group.alb.id]
-}
+} */
+
 # resource "aws_route53_zone" "primary" {
 #   name = "devopsdeployed.com"
 # }
