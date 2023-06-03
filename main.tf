@@ -7,7 +7,7 @@ resource "aws_instance" "instance_1" {
   ami             = "ami-011899242bb902164" # Ubuntu 20.04 LTS // us-east-1
   instance_type   = "t2.micro"
   tags = {
-    Name = "Instance 1"
+    Name = "Instance 10"
   }
   security_groups = [aws_security_group.instances.name]
   user_data       = <<-EOF
@@ -20,7 +20,7 @@ resource "aws_instance" "instance_2" {
   ami             = "ami-011899242bb902164" # Ubuntu 20.04 LTS // us-east-1
   instance_type   = "t2.micro"
   tags = {
-    Name = "Instance 2"
+    Name = "Instance 20"
   }
   security_groups = [aws_security_group.instances.name]
   user_data       = <<-EOF
