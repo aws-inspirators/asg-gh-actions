@@ -55,7 +55,7 @@ resource "aws_instance" "instance_2" {
               EOF
 }
 resource "aws_s3_bucket" "bucket" {
-  bucket        = "dibo-devops-directive-web-app-data"
+  bucket        = "dibo-devops-directive-web-app-data12"
   force_destroy = true
   versioning {
     enabled = true
@@ -73,9 +73,9 @@ data "aws_vpc" "default_vpc" {
 }
 
 resource "aws_security_group" "instances" {
-  name = "instance-security-group"
+  name = "instance-security-group12"
 }
-resource "aws_security_group_rule" "allow_http_inbound" {
+resource "aws_security_group_rule" "allow_http_inbound3" {
   type              = "ingress"
   security_group_id = aws_security_group.instances.id
   from_port   = 8080
@@ -139,7 +139,7 @@ resource "aws_lb_target_group_attachment" "instance_2" {
 resource "aws_security_group" "alb" {
   name = "alb-security-group"
 }
-resource "aws_security_group_rule" "allow_alb_http_inbound" {
+resource "aws_security_group_rule" "allow_alb_http_inbound1" {
   type              = "ingress"
   security_group_id = aws_security_group.alb.id
   from_port   = 80
@@ -147,7 +147,7 @@ resource "aws_security_group_rule" "allow_alb_http_inbound" {
   protocol    = "tcp"
   cidr_blocks = ["0.0.0.0/0"]
 }
-resource "aws_security_group_rule" "allow_alb_all_outbound" {
+resource "aws_security_group_rule" "allow_alb_all_outbound2" {
   type              = "egress"
   security_group_id = aws_security_group.alb.id
   from_port   = 0
