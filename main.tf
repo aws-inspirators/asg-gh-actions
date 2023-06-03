@@ -1,7 +1,32 @@
 provider "aws"{
     region = "us-east-1"
 }
- resource 
+
+data "aws_ami" "ubuntu" {
+  most_recent = true
+
+  filter {
+    name   = "name"
+    values = ["ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-*"]
+  }
+
+  filter {
+    name   = "virtualization-type"
+    values = ["hvm"]
+  }
+
+  owners = ["099720109477"] # Canonical
+}
+
+resource "aws_instance" "web" {
+  ami           = data.aws_ami.ubuntu.id
+  instance_type = var.instance_type
+
+  tags = {
+    Name = "HelloWorld"
+  }
+}
+
 
 resource "aws_instance" "instance_1" {
   ami             = "ami-011899242bb902164" # Ubuntu 20.04 LTS // us-east-1
@@ -150,6 +175,7 @@ resource "aws_lb" "load_balancer" {
 #     evaluate_target_health = true
 #   }
 # }
+
 resource "aws_db_instance" "db_instance" {
   allocated_storage   = 20
   storage_type        = "standard"
