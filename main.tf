@@ -34,7 +34,6 @@ resource "aws_instance" "instance_10" {
   tags = {
     Name = "Instance 101"
   }
-  security_groups = [aws_security_group.instances.name]
   user_data       = <<-EOF
               #!/bin/bash
               echo "Hello, World 1" > index.html
@@ -47,7 +46,6 @@ resource "aws_instance" "instance_21" {
   tags = {
     Name = "Instance 201"
   }
-  security_groups = [aws_security_group.instances.name]
   user_data       = <<-EOF
               #!/bin/bash
               echo "Hello, World 2" > index.html
