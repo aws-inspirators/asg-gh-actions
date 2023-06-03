@@ -28,11 +28,11 @@ resource "aws_instance" "web" {
 }
 
 
-resource "aws_instance" "instance_1" {
+resource "aws_instance" "instance_10" {
   ami             = "ami-011899242bb902164" # Ubuntu 20.04 LTS // us-east-1
   instance_type   = "t2.micro"
   tags = {
-    Name = "Instance 10"
+    Name = "Instance 101"
   }
   security_groups = [aws_security_group.instances.name]
   user_data       = <<-EOF
@@ -41,11 +41,11 @@ resource "aws_instance" "instance_1" {
               python3 -m http.server 8080 &
               EOF
 }
-resource "aws_instance" "instance_2" {
+resource "aws_instance" "instance_21" {
   ami             = "ami-011899242bb902164" # Ubuntu 20.04 LTS // us-east-1
   instance_type   = "t2.micro"
   tags = {
-    Name = "Instance 20"
+    Name = "Instance 201"
   }
   security_groups = [aws_security_group.instances.name]
   user_data       = <<-EOF
@@ -55,7 +55,7 @@ resource "aws_instance" "instance_2" {
               EOF
 }
 resource "aws_s3_bucket" "bucket" {
-  bucket        = "dibo-devops-directive-web-app-data12"
+  bucket        = "dibo-devops-directive-web-app-data123"
   force_destroy = true
   versioning {
     enabled = true
@@ -72,7 +72,7 @@ data "aws_vpc" "default_vpc" {
   default = true
 }
 
-resource "aws_security_group" "instances" {
+/* resource "aws_security_group" "instances" {
   name = "instance-security-group12"
 }
 resource "aws_security_group_rule" "allow_http_inbound3" {
@@ -136,7 +136,7 @@ resource "aws_lb_target_group_attachment" "instance_2" {
   }
 } */
 
-resource "aws_security_group" "alb" {
+/* resource "aws_security_group" "alb" {
   name = "alb-security-group"
 }
 resource "aws_security_group_rule" "allow_alb_http_inbound1" {
@@ -154,7 +154,7 @@ resource "aws_security_group_rule" "allow_alb_all_outbound2" {
   to_port     = 0
   protocol    = "-1"
   cidr_blocks = ["0.0.0.0/0"]
-}
+} */
 /* resource "aws_lb" "load_balancer" {
   name               = "web-app-lb"
   load_balancer_type = "application"
@@ -175,7 +175,7 @@ resource "aws_security_group_rule" "allow_alb_all_outbound2" {
 #   }
 # }
 
-resource "aws_db_instance" "db_instance" {
+/* resource "aws_db_instance" "db_instance" {
   allocated_storage   = 20
   storage_type        = "standard"
   engine              = "postgres"
@@ -185,4 +185,4 @@ resource "aws_db_instance" "db_instance" {
   username            = "foo"
   password            = "foobarbaz"
   skip_final_snapshot = true
-}
+}  */
